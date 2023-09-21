@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getPost } from "../../redux/action/action"
 const Post = () => {
-    const [posts, setPosts] = useState([]); // State to hold the posts data
 
+    const dispatch = useDispatch();
+    const posts = useSelector(state => state.allPosts)
     useEffect(() => {
-        
-        const fetchData = async () => {
-            try {
-                const res = await axios.get('http://localhost:3000/Posts/posts');
-                setPosts(res.data); 
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+        dispatch(getPost())
 
-        fetchData(); 
-    }, []);
+    }, [dispatch]);
 
+    console.log(posts)
     return (
         <div>
             {posts.map(post => (
