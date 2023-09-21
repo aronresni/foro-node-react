@@ -5,7 +5,8 @@ const postPost = async (description, image, id) => {
         const post = await Post.create({
             description,
             image,
-            id
+            id,
+      
         })
         return post
     } catch (error) {

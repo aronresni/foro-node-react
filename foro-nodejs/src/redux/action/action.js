@@ -17,3 +17,14 @@ export const getPost = () => {
         }
     }
 }
+
+export const getPostByName = (name) => {
+    return async function (dispatch){
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+
+}

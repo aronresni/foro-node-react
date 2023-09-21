@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 
 const FormLogin = () => {
-
+    const [token, setToken] = useState(null);
     const navigate = useNavigate()
     const [userLogin, setUserLogin] = useState({
         email: "",
         password: ""
     })
+    useEffect(() => {
+        if (token !== null) {
+            navigate(`/home`);
+        }
+    }, [token]);
 
     const handleEmailChange = (e) => {
         setUserLogin({
@@ -27,10 +32,12 @@ const FormLogin = () => {
     const handleLoginSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post("http://localhost:3000/Users/signup", userLogin)
+            const response = await axios.post("http://localhost:3000/Users/login", userLogin)
+            sessionStorage.setItem("token", response.data.token);
+            setToken(response.data.token)
             navigate("/home")
         } catch (error) {
-
+            throw error
         }
     }
 

@@ -7,6 +7,7 @@ const FormRegister = () => {
     //const [errorMsg, setErrorMsg] = useState('');
     const [userRegister, setUserRegister] = useState({
         email: "",
+        username: "",
         password: ""
     })
 
@@ -15,6 +16,12 @@ const FormRegister = () => {
             ...userRegister,
             email: e.target.value
         });
+    }
+    const handleUsernameChange = (e) => {
+        setUserRegister({
+            ...userRegister,
+            username: e.target.value
+        })
     }
 
     const handlePasswordChange = (e) => {
@@ -29,7 +36,7 @@ const FormRegister = () => {
         e.preventDefault()
         try {
             const response = await axios.post("http://localhost:3000/Users/signup", userRegister)
-              
+
             navigate("/login")
         } catch (error) {
 
@@ -44,6 +51,12 @@ const FormRegister = () => {
                     <label>
                         Email:
                         <input value={userRegister.email} onChange={handleEmailChange} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Username:
+                        <input value={userRegister.username} onChange={handleUsernameChange} />
                     </label>
                 </div>
                 <div>

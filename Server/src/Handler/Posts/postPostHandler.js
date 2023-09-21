@@ -5,6 +5,7 @@ const postPost = require("../../controllers/Posts/postPost")
 const postPostHandler = async (req, res) => {
     try {
         const { description, image } = req.body
+        
         const id = req.query.id;
         const createPost = await postPost.postPost(description, image, id)
         res.status(200).json(createPost)

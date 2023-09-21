@@ -1,11 +1,12 @@
 import React from 'react'
 
-const CreatePost = () => {
+const SearchBar = () => {
     return (
         <div>
-
+            <input />
         </div>
     )
 }
 
-export default CreatePost
+export default SearchBar
+

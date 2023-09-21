@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 const getUserHandler = require("../Handler/Users/getUserHandler")
-const postUserHandler = require("../Handler/Users/postUserHandler")
-router.post("/signup", postUserHandler)
+const postRegisterHandler = require("../Handler/Users/postRegisterHandler")
+const postLoginHandler = require("../Handler/Users/postLoginHandler")
+router.post("/signup", postRegisterHandler)
+router.post("/login", postLoginHandler)
 router.get("/users", getUserHandler)
 
 
