@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Post from '../../components/Posts/Post'
+import CreatePost from "../../components/Posts/CreatePost"
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
   return (
 
     <div>
+      <CreatePost />
       <Post />
     </div>
   )

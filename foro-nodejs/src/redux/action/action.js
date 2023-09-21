@@ -1,5 +1,5 @@
 import { GET_POST, GET_POST_BY_NAME, POST_POST, POST_EDIT_POST, POST_DELETE_POST } from "./constants"
-import axios from "axios"
+import axios, { AxiosHeaders } from "axios"
 
 const URL_POSTS = "http://localhost:3000/Posts"
 
@@ -18,12 +18,23 @@ export const getPost = () => {
     }
 }
 
+export const postPost = (payload) => {
+    return async function (dispatch) {
+        const json = await axios.post("/Posts/createpost", payload)
+        const post = json.data
+        return dispatch({
+            type: POST_POST,
+            payload: post
+        })
+    }
+}
+
 export const getPostByName = (name) => {
-    return async function (dispatch){
+    return async function (dispatch) {
         try {
-            
+
         } catch (error) {
-            
+
         }
     }
 
