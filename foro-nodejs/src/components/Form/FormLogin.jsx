@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
-
+import { useDispatch } from "react-redux"
+import {login} from "../../redux/action/action"
 const FormLogin = () => {
+    const dispatch = useDispatch()
+    const checkToken = sessionStorage.getItem('token');
     const [token, setToken] = useState(null);
     const navigate = useNavigate()
     const [userLogin, setUserLogin] = useState({
@@ -10,10 +12,10 @@ const FormLogin = () => {
         password: ""
     })
     useEffect(() => {
-        if (token !== null) {
-            navigate(`/home`);
+        if (checkToken !== null) {
+            navigate('/home');
         }
-    }, [token]);
+    }, [checkToken]);
 
     const handleEmailChange = (e) => {
         setUserLogin({
@@ -28,18 +30,18 @@ const FormLogin = () => {
             password: e.target.value
         })
     }
-
     const handleLoginSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/Users/login", userLogin)
-            sessionStorage.setItem("token", response.data.token);
-            setToken(response.data.token)
-            navigate("/home")
+            const { response, user } = await dispatch(login(userLogin));
+           // sessionStorage.setItem("token", response.data.token);
+            setToken(response.data.token);
+            console.log("Usuario:", user);
+           // navigate("/home");
         } catch (error) {
-            throw error
+            console.error("Error de inicio de sesión:", error);
         }
-    }
+    };
 
 
     return (

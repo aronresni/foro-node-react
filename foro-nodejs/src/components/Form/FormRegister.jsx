@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios'
 
 const FormRegister = () => {
     const navigate = useNavigate()
+    const checkToken = sessionStorage.getItem('token');
     //const [errorMsg, setErrorMsg] = useState('');
     const [userRegister, setUserRegister] = useState({
         email: "",
         username: "",
         password: ""
     })
+    useEffect(() => {
+        if (checkToken !== null) {
+            navigate('/home');
+        }
+    }, [checkToken]);
 
     const handleEmailChange = (e) => {
         setUserRegister({

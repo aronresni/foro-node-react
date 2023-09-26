@@ -1,7 +1,39 @@
-import { GET_POST, GET_POST_BY_NAME, POST_POST, POST_EDIT_POST, POST_DELETE_POST } from "./constants"
-import axios, { AxiosHeaders } from "axios"
+import { GET_POST, GET_POST_BY_DESCRIPTION, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS } from "./constants"
+import axios from "axios"
 
-const URL_POSTS = "http://localhost:3000/Posts"
+
+export const getUsers = () => {
+    return async function (dispatch) {
+        try {
+            const res = await axios.get("http://localhost:3000/Users/users")
+            return dispatch({
+                type: GET_USERS,
+                payload: res.data
+            })
+        } catch (error) {
+            return error
+        }
+    }
+}
+export const login = (userLogin) => {
+    return async function (dispatch) {
+        const response = await axios.post(`http://localhost:3000/Users/login`, userLogin)
+
+        const user = response.data
+        dispatch({
+            type: LOGIN,
+            payload: user
+
+        })
+        return { user, response }
+    }
+}
+export const register = (payload) => {
+    return async function (dispatch) {
+
+    }
+}
+
 
 export const getPost = () => {
     return async function (dispatch) {
@@ -17,10 +49,9 @@ export const getPost = () => {
         }
     }
 }
-
 export const postPost = (payload) => {
     return async function (dispatch) {
-        const json = await axios.post("/Posts/createpost", payload)
+        const json = await axios.post(`${URL_POSTS}/createpost`, payload)
         const post = json.data
         return dispatch({
             type: POST_POST,
@@ -29,13 +60,17 @@ export const postPost = (payload) => {
     }
 }
 
-export const getPostByName = (name) => {
+export const getPostByDescription = (description) => {
     return async function (dispatch) {
         try {
-
+            const res = await axios.get(`${URL_POSTS}/description?description=${description}`)
+            return dispatch({
+                type: GET_POST_BY_DESCRIPTION,
+                payload: res.data,
+            })
         } catch (error) {
-
+            return error
         }
     }
-
 }
+

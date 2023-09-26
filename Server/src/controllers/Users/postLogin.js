@@ -2,21 +2,20 @@ const { User } = require("../../db");
 
 const postLogin = async (email, password) => {
     try {
-        // Buscar al usuario en la base de datos por correo electrónico
-        const user = await User.findOne({ where: { email } }); // Utilizar options.where
-
+        const user = await User.findOne({ where: { email } });
         if (!user) {
-            return "Usuario no encontrado"
+            throw new Error("Usuario no encontrado");
         }
 
         // Verificar la contraseña
         if (user.password !== password) {
-            return "Password Incorrect"
+            throw new Error("Contraseña incorrecta");
         }
 
+      
+        return user;
     } catch (error) {
- return error
-
+        throw error; 
     }
 };
 
