@@ -29,7 +29,6 @@ const rootReducer = (state = initialstate, action) => {
                 users: action.payload
             }
         case LOGIN:
-            console.log(state.user);
             return {
                 ...state,
                 user: action.payload

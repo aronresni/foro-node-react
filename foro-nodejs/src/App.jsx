@@ -1,10 +1,7 @@
 import React from 'react'
 import './App.css'
 import { Route, Routes } from "react-router-dom"
-import SignUp from './views/Auth/SignUp'
-import Login from './views/Auth/Login'
-import Landing from './views/Landing/Landing'
-import Home from './views/Home/Home'
+import { Landing, SignUp, Login, Home, UserPage } from "./views/index"
 function App() {
 
   return (
@@ -13,6 +10,7 @@ function App() {
       <Route path='/register' element={<SignUp />} />
       <Route path='/login' element={<Login />} />
       <Route path='/home' element={<Home />} />
+      <Route path='/user' element={<UserPage />} />
     </Routes>
   )
 }

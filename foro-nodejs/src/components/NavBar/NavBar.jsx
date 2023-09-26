@@ -10,7 +10,9 @@ const NavBar = () => {
                 <h1>Searchbar</h1>
             </div>
             <div>
+            <Link to="/">
                 <h1>User</h1>
+            </Link>
             </div>
         </div>
     )
