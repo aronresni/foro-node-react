@@ -3,8 +3,8 @@ const uuid = require("uuid");
 
 const postLoginHandler = async (req, res) => {
     try {
-        const { email, password } = req.body
-        const login = await postLogin.postLogin(email, password)
+        const { username, password } = req.body
+        const login = await postLogin.postLogin(username, password)
         const token = uuid.v4();
         res.status(200).json({ login, token });
 

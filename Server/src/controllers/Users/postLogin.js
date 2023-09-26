@@ -1,8 +1,8 @@
 const { User } = require("../../db");
 
-const postLogin = async (email, password) => {
+const postLogin = async (username, password) => {
     try {
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({ where: { username } });
         if (!user) {
             throw new Error("Usuario no encontrado");
         }

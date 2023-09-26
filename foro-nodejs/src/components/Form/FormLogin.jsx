@@ -20,7 +20,7 @@ const FormLogin = () => {
     const handleEmailChange = (e) => {
         setUserLogin({
             ...userLogin,
-            email: e.target.value
+            username: e.target.value
         })
     }
 
@@ -34,10 +34,10 @@ const FormLogin = () => {
         e.preventDefault();
         try {
             const { response, user } = await dispatch(login(userLogin));
-           // sessionStorage.setItem("token", response.data.token);
+           sessionStorage.setItem("token", response.data.token);
             setToken(response.data.token);
             console.log("Usuario:", user);
-           // navigate("/home");
+           navigate("/home");
         } catch (error) {
             console.error("Error de inicio de sesión:", error);
         }
@@ -49,8 +49,8 @@ const FormLogin = () => {
             <form onSubmit={handleLoginSubmit}>
                 <div>
                     <label>
-                        Email:
-                        <input value={userLogin.email} onChange={handleEmailChange} />
+                    username:
+                        <input value={userLogin.username} onChange={handleEmailChange} />
                     </label>
                 </div>
                 <div>

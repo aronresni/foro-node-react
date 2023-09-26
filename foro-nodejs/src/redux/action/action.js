@@ -1,5 +1,5 @@
 import { GET_POST, GET_POST_BY_DESCRIPTION, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS } from "./constants"
-import axios from "axios"
+import axios, { AxiosHeaders } from "axios"
 
 
 export const getUsers = () => {
@@ -26,11 +26,6 @@ export const login = (userLogin) => {
 
         })
         return { user, response }
-    }
-}
-export const register = (payload) => {
-    return async function (dispatch) {
-
     }
 }
 
