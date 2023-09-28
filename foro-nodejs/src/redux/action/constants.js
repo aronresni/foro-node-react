@@ -6,3 +6,4 @@ export const POST_DELETE_POST = "POST_DELETE_POST";
 export const GET_USERS = "GET_USERS"
 export const LOGIN = "LOGIN"
 export const LOGOUT = "LOGOUT"
+export const SET_USER = "SET_USER"

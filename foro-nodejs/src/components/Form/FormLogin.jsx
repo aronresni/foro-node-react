@@ -1,62 +1,64 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { useDispatch } from "react-redux"
-import {login} from "../../redux/action/action"
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, setUser } from '../../redux/action/action';
+
 const FormLogin = () => {
-    const dispatch = useDispatch()
-    const checkToken = sessionStorage.getItem('token');
-    const [token, setToken] = useState(null);
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [userLogin, setUserLogin] = useState({
-        email: "",
-        password: ""
-    })
-    useEffect(() => {
-        if (checkToken !== null) {
-            navigate('/home');
-        }
-    }, [checkToken]);
+        username: '',
+        password: '',
+    });
 
     const handleEmailChange = (e) => {
         setUserLogin({
             ...userLogin,
-            username: e.target.value
-        })
-    }
+            username: e.target.value,
+        });
+    };
 
     const handlePasswordChange = (e) => {
         setUserLogin({
             ...userLogin,
-            password: e.target.value
-        })
-    }
+            password: e.target.value,
+        });
+    };
+
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
             const { response, user } = await dispatch(login(userLogin));
-           sessionStorage.setItem("token", response.data.token);
-            setToken(response.data.token);
-            console.log("Usuario:", user);
-           navigate("/home");
+            sessionStorage.setItem('token', response.data.token);
+            dispatch(setUser(user));
+
+            navigate('/home');
         } catch (error) {
-            console.error("Error de inicio de sesión:", error);
+            console.error('Error de inicio de sesión:', error);
         }
     };
+    const checkToken = sessionStorage.getItem('token');
+    const user = useSelector((state) => state.user); 
 
+    useEffect(() => {
+        if (checkToken !== null) {
+            navigate('/home');
+        }
+    }, [checkToken, navigate]);
 
     return (
         <div>
             <form onSubmit={handleLoginSubmit}>
                 <div>
                     <label>
-                    username:
+                        Username:
                         <input value={userLogin.username} onChange={handleEmailChange} />
                     </label>
                 </div>
                 <div>
                     <label>
                         Password:
-                        <input value={userLogin.password} onChange={handlePasswordChange} />
+                        <input value={userLogin.password} onChange={handlePasswordChange} type="password" />
                     </label>
                 </div>
                 <div>
@@ -65,12 +67,18 @@ const FormLogin = () => {
                 <div>
                     <button type="submit">Log In</button>
                     <Link to="/register">
-                        <button>Dont have an account?</button>
+                        <button>Don't have an account?</button>
                     </Link>
                 </div>
             </form>
+            {user && (
+                <div>
+                    {/* Puedes mostrar información del usuario después de iniciar sesión */}
+                    <p>Welcome, {user.name}!</p>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default FormLogin
+export default FormLogin;

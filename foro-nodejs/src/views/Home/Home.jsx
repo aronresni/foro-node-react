@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import Post from '../../components/Posts/Post'
-import CreatePost from "../../components/Posts/CreatePost"
 import { getUsers, getPost } from '../../redux/action/action'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux"
+import { Post, NavBar, CreatePost } from "../../components/index"
 
 
 const Home = () => {
-  dispatch = useDispatch()
+  const dispatch = useDispatch()
+
+  const user = useSelector((state) => state.user)
+
   const token = sessionStorage.getItem(`token`)
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,17 +18,15 @@ const Home = () => {
     if (token === null) {
       navigate('/login');
     }
-    
     dispatch(getUsers())
     dispatch(getPost())
-
-
   }, [location, navigate, token])
 
 
   return (
 
     <div>
+      <NavBar />
       <CreatePost />
       <Post />
     </div>

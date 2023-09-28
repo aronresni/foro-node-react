@@ -1,4 +1,4 @@
-import { GET_POST, GET_POST_BY_DESCRIPTION, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS } from "./constants"
+import { GET_POST, GET_POST_BY_DESCRIPTION, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS, LOGOUT } from "./constants"
 import axios from "axios"
 
 
@@ -18,14 +18,13 @@ export const getUsers = () => {
 export const login = (userLogin) => {
     return async function (dispatch) {
         const response = await axios.post(`http://localhost:3000/Users/login`, userLogin)
-
         const user = response.data
         dispatch({
             type: LOGIN,
             payload: user
 
         })
-        return { user, response, dispatch }
+        return { user, response }
     }
 }
 
@@ -48,7 +47,7 @@ export const getPost = () => {
 }
 export const postPost = (payload) => {
     return async function (dispatch) {
-        const json = await axios.post(`${URL_POSTS}/createpost`, payload)
+        const json = await axios.post(`http://localhost:3000/Posts/createpost`, payload)
         const post = json.data
         return dispatch({
             type: POST_POST,
@@ -71,3 +70,11 @@ export const getPostByDescription = (description) => {
     }
 }
 
+export const setUser = (user) => ({
+    type: 'SET_USER',
+    payload: user,
+});
+
+export const logout = () => ({
+    type: 'LOGOUT',
+});
