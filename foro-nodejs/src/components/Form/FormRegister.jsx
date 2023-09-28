@@ -58,17 +58,21 @@ const FormRegister = () => {
                         Email:
                         <input value={userRegister.email} onChange={handleEmailChange} />
                     </label>
-                </div>
+                </div>  
                 <div>
                     <label>
                         Username:
                         <input value={userRegister.username} onChange={handleUsernameChange} />
                     </label>
                 </div>
-                <div>
+                <div>   
                     <label>
                         Password:
-                        <input value={userRegister.password} onChange={handlePasswordChange} />
+                        <input value={userRegister.password} onChange={handlePasswordChange} type="password" />
+                    </label>
+                    <label>
+                        Repeat Password:
+                        <input value={userRegister.password} onChange={handlePasswordChange} type="password" />
                     </label>
                 </div>
                 <div>

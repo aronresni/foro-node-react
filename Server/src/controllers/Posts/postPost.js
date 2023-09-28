@@ -3,7 +3,7 @@ const { Post } = require("../../db")
 const postPost = async (description, image, id, user) => {
     try {
         const post = await Post.create({
-            user,
+            username,
             description,
             image,
             id,

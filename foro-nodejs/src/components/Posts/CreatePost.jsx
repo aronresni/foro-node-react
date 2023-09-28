@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { postPost } from '../../redux/action/action';
+import  UserContext  from '../../state/userContextProvider';
 
 const CreatePost = () => {
+    const  user  = useContext(UserContext)
     const dispatch = useDispatch();
     const [userPost, setUserPost] = useState({
         description: "",
@@ -31,6 +33,7 @@ const CreatePost = () => {
     return (
 
         <form onSubmit={handleSubmitPost}>
+            <h1>{user.username}</h1>
             <label>
                 Description:
                 <input value={userPost.description} onChange={handleDescriptionChange} />

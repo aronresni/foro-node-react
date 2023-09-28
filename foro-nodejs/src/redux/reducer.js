@@ -1,6 +1,5 @@
-import { GET_POST, GET_POST_BY_DESCRIPTION, LOGOUT, POST_POST, POST_EDIT_POST, POST_DELETE_POST, GET_USERS } from "../action/constants"
-import { combineReducers } from 'redux';
-import userReducer from './userReducer';
+import { GET_POST, GET_POST_BY_DESCRIPTION, LOGOUT, POST_POST, POST_EDIT_POST, POST_DELETE_POST, GET_USERS } from "./action/constants"
+
 
 const initialstate = {
     allPosts: [],
@@ -10,7 +9,7 @@ const initialstate = {
   
 }
 
-const foroReducer = (state = initialstate, action) => {
+const rootReducer = (state = initialstate, action) => {
     
     switch (action.type) {
         
@@ -40,4 +39,4 @@ const foroReducer = (state = initialstate, action) => {
 
 
 
-export default foroReducer
+export default rootReducer

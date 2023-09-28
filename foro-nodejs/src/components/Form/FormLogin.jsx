@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, setUser } from '../../redux/action/action';
+import { UserContext } from '../../state/userContextProvider';
+import axios from 'axios';
 
 const FormLogin = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { loginUser } = useContext(UserContext); // Accedes al contexto aquí
     const [userLogin, setUserLogin] = useState({
         username: '',
         password: '',
     });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleEmailChange = (e) => {
         setUserLogin({
@@ -27,18 +29,22 @@ const FormLogin = () => {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const { response, user } = await dispatch(login(userLogin));
-            sessionStorage.setItem('token', response.data.token);
-            dispatch(setUser(user));
+        setLoading(true);
 
+        try {
+            const response = await axios.post(`http://localhost:3000/Users/login`, userLogin);
+            const { data: { token, ...userData } } = response;
+            loginUser(userData, token); // Usas la función loginUser del contexto
+            sessionStorage.setItem('token', token);
+            setLoading(false);
             navigate('/home');
         } catch (error) {
-            console.error('Error de inicio de sesión:', error);
+            setError('Error de inicio de sesión. Verifica tus credenciales.');
+            setLoading(false);
         }
     };
+
     const checkToken = sessionStorage.getItem('token');
-    const user = useSelector((state) => state.user); 
 
     useEffect(() => {
         if (checkToken !== null) {
@@ -71,12 +77,6 @@ const FormLogin = () => {
                     </Link>
                 </div>
             </form>
-            {user && (
-                <div>
-                    {/* Puedes mostrar información del usuario después de iniciar sesión */}
-                    <p>Welcome, {user.name}!</p>
-                </div>
-            )}
         </div>
     );
 };

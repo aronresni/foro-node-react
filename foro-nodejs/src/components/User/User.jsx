@@ -1,12 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-
+import React, {useContext} from 'react'
+import { UserContext } from '../../state/userContextProvider'
 const User = () => {
-  const user = useSelector((state) => state.user)
+  const { user } = useContext(UserContext)
   console.log(user);
   return (
     <div>
-      <h1>{user.username}</h1>
+      {user ? (
+        <div>
+          <p>Welcome, {user.username}!</p> {/* Accede al nombre de usuario del objeto del usuario */}
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <div>
+          <p>Please log in.</p>
+        </div>
+      )}
     </div>
   )
 }
