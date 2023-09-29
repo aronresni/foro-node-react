@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getPost } from "../../redux/action/action"
+import { getPost} from "../../redux/action/action"
 
 const Post = () => {
     const dispatch = useDispatch();
@@ -9,6 +9,9 @@ const user = useSelector(state=> state.userstate)
     useEffect(() => {
         dispatch(getPost())
     }, [dispatch]);
+
+
+
     if (!Array.isArray(posts)) {
         return <p>Not posts yet.</p>;
     }

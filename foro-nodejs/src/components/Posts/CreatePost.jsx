@@ -1,16 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { postPost } from '../../redux/action/action';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { getPost, postPost, activeuser } from '../../redux/action/action';
 
 const CreatePost = () => {
+    useEffect(() => {
+        dispatch(activeuser(username))
+    }, []);
+    const username = sessionStorage.getItem(`username`)
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const user = useSelector(state => state.userstate)
+    console.log(user.username);
     const [userPost, setUserPost] = useState({
         description: "",
         image: null,
-        username: "",
+        username: username,
     })
-    console.log(user);
+    console.log(userPost);
     const handleDescriptionChange = (e) => {
         setUserPost({
             ...userPost,
@@ -28,16 +35,15 @@ const CreatePost = () => {
     };
 
 
-
     const handleSubmitPost = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
         formData.append('description', userPost.description);
         formData.append('image', userPost.image);
-        formData.append('username', user.username);
-
+        formData.append('username', username);
         dispatch(postPost(formData));
+
     };
 
     return (
@@ -50,7 +56,7 @@ const CreatePost = () => {
             </label>
             <label>
                 Image:
-                <input type="file" onChange={handleImageChange}
+                <input type="file" name='image' onChange={handleImageChange}
                 />
             </label>
 

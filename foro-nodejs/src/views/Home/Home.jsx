@@ -9,7 +9,6 @@ const Home = () => {
   const dispatch = useDispatch()
   const token = sessionStorage.getItem(`token`)
   const username = sessionStorage.getItem(`username`)
-  const location = useLocation();
   const navigate = useNavigate();
   const user = useSelector(state => state.userstate)
   console.log(user);
@@ -20,7 +19,7 @@ const Home = () => {
     dispatch(getUsers())
     dispatch(getPost())
     dispatch(activeuser(username))
-  }, [location, navigate, token])
+  }, [])
 
 
   return (
