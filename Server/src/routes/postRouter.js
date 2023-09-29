@@ -20,12 +20,13 @@ const upload = multer({ storage: storage });
 const getPostByDescriptionHandler = require("../Handler/Posts/getPostByDescriptionHandler");
 const postPostHandler = require("../Handler/Posts/postPostHandler");
 const getPostHandler = require("../Handler/Posts/getPostHandler");
-
+const getImagePostHandler = require("../Handler/Posts/getImagePostHandler")
 // Ruta para crear una publicación con carga de imagen utilizando Multer
 router.post("/createpost", upload.single("image"), postPostHandler);
 
 // Otras rutas relacionadas con las publicaciones...
 router.get("/posts", getPostHandler);
 router.get("/:description", getPostByDescriptionHandler);
+router.get("/getImage/:imageName", getImagePostHandler)
 
 module.exports = router;

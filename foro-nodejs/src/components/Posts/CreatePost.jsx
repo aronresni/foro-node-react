@@ -43,7 +43,9 @@ const CreatePost = () => {
         formData.append('image', userPost.image);
         formData.append('username', username);
         dispatch(postPost(formData));
-
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     };
 
     return (

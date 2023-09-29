@@ -1,4 +1,4 @@
-import { GET_POST, GET_POST_BY_DESCRIPTION, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS, LOGOUT, SET_USER } from "./constants"
+import { GET_POST, GET_POST_BY_DESCRIPTION,GET_IMAGE, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS, LOGOUT, SET_USER } from "./constants"
 import axios from "axios"
 
 
@@ -70,6 +70,19 @@ export const getPostByDescription = (description) => {
     }
 }
 
+export const getImage = (imageName)=>{
+return async function (dispatch){
+    try {
+        const res = await axios.get (`http://localhost:3000/Posts/getImage/${imageName}`)
+        return dispatch({
+            type: GET_IMAGE,
+            payload: res.data
+        })
+    } catch (error) {
+        return error
+    }
+}
+}
 export const activeuser = (username) => {
     return async function (dispatch) {
         try {

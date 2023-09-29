@@ -1,4 +1,4 @@
-import { GET_POST, GET_POST_BY_DESCRIPTION, LOGOUT, POST_POST, POST_EDIT_POST, POST_DELETE_POST, GET_USERS, SET_USER } from "./action/constants"
+import { GET_POST, GET_POST_BY_DESCRIPTION, LOGOUT, POST_POST, POST_EDIT_POST, POST_DELETE_POST, GET_USERS,GET_IMAGE, SET_USER } from "./action/constants"
 
 
 const initialstate = {
@@ -36,6 +36,11 @@ const rootReducer = (state = initialstate, action) => {
                 userstate: action.payload
 
             }
+            case GET_IMAGE:
+                return{
+                    ...state,
+                    allPosts: action.payload
+                }
 
 
         default:
