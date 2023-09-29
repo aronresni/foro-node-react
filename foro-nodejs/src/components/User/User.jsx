@@ -1,20 +1,20 @@
-import React, {useContext} from 'react'
-import { UserContext } from '../../state/userContextProvider'
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { activeuser } from '../../redux/action/action';
 const User = () => {
-  const { user } = useContext(UserContext)
-  console.log(user);
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.userstate)
+  const username = sessionStorage.getItem(`username`)
+useEffect(() => {
+dispatch(activeuser(username))
+}, []);
+console.log(user);
+console.log(username);
+
   return (
     <div>
-      {user ? (
-        <div>
-          <p>Welcome, {user.username}!</p> {/* Accede al nombre de usuario del objeto del usuario */}
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
-        <div>
-          <p>Please log in.</p>
-        </div>
-      )}
+    <p>{user.username}</p>
+    <p>{user.email}</p>
     </div>
   )
 }

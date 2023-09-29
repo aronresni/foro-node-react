@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserContext } from '../../state/userContextProvider';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/action/action';
 
 const FormLogin = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate();
-    const { loginUser } = useContext(UserContext); // Accedes al contexto aquí
     const [userLogin, setUserLogin] = useState({
         username: '',
         password: '',
     });
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -32,15 +33,15 @@ const FormLogin = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`http://localhost:3000/Users/login`, userLogin);
-            const { data: { token, ...userData } } = response;
-            loginUser(userData, token); // Usas la función loginUser del contexto
+            const { response, user } = await dispatch(login(userLogin));
+            console.log(response.data);
+            const token = response.data.token
+            const username = response.data.login.username
             sessionStorage.setItem('token', token);
-            setLoading(false);
+            sessionStorage.setItem('username', username);
             navigate('/home');
         } catch (error) {
             setError('Error de inicio de sesión. Verifica tus credenciales.');
-            setLoading(false);
         }
     };
 

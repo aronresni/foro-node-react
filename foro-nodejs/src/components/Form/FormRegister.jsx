@@ -9,7 +9,7 @@ const FormRegister = () => {
     const [userRegister, setUserRegister] = useState({
         email: "",
         username: "",
-        password: ""
+        password: "",
     })
     useEffect(() => {
         if (checkToken !== null) {

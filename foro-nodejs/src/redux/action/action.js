@@ -1,4 +1,4 @@
-import { GET_POST, GET_POST_BY_DESCRIPTION, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS, LOGOUT } from "./constants"
+import { GET_POST, GET_POST_BY_DESCRIPTION, POST_POST, LOGIN, POST_EDIT_POST, POST_DELETE_POST, GET_USERS, LOGOUT, SET_USER } from "./constants"
 import axios from "axios"
 
 
@@ -70,3 +70,16 @@ export const getPostByDescription = (description) => {
     }
 }
 
+export const activeuser = (username) => {
+    return async function (dispatch) {
+        try {
+            const res = await axios.get(`http://localhost:3000/Users/activeuser?username=${username}`)
+            return dispatch({
+                type: SET_USER,
+                payload: res.data
+            })
+        } catch (error) {
+return error
+        }
+    }
+}

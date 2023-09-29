@@ -5,7 +5,8 @@ const postRegister = async (email, password, username) => {
         const newUser = new User({
             email,
             username,
-            password
+            password,
+            
         })
 
         await newUser.save(); // Espera a que se complete la operación de guardado

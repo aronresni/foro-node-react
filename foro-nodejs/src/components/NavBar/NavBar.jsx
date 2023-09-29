@@ -1,20 +1,15 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import { useSelector } from 'react-redux'
+import logo from "../../assets/pngwind.png"
+import defaultProfileImage from "../../assets/profile.jpg"
 const NavBar = () => {
+    const user = useSelector(state => state.userstate)
+    
     return (
-        <div>
-            <div>
-                <img src='logo' />
-            </div>
-            <div>
-                <h1>Searchbar</h1>
-            </div>
-            <div>
-            <Link to="/">
-                <h1>User</h1>
-            </Link>
-            </div>
-        </div>
+   <nav>
+    PUTO EL QUE LEE
+   </nav>
     )
 }
 

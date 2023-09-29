@@ -1,4 +1,4 @@
-import { GET_POST, GET_POST_BY_DESCRIPTION, LOGOUT, POST_POST, POST_EDIT_POST, POST_DELETE_POST, GET_USERS } from "./action/constants"
+import { GET_POST, GET_POST_BY_DESCRIPTION, LOGOUT, POST_POST, POST_EDIT_POST, POST_DELETE_POST, GET_USERS, SET_USER } from "./action/constants"
 
 
 const initialstate = {
@@ -6,13 +6,13 @@ const initialstate = {
     post: [],
     userPosts: [],
     users: [],
-  
+    userstate: []
 }
 
 const rootReducer = (state = initialstate, action) => {
-    
+
     switch (action.type) {
-        
+
         case GET_POST:
             return {
                 ...state,
@@ -29,6 +29,12 @@ const rootReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 users: action.payload
+            }
+        case SET_USER:
+            return {
+                ...state,
+                userstate: action.payload
+
             }
 
 

@@ -1,6 +1,6 @@
 const { Post } = require("../../db")
 
-const postPost = async (description, image, id, user) => {
+const postPost = async (description, image, id, username) => {
     try {
         const post = await Post.create({
             username,

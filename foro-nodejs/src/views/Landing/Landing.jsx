@@ -13,6 +13,9 @@ const Landing = () => {
 
     return (
         <div>
+
+              
+           
             <Link to="/register">
                 <button>Register</button>
             </Link>
