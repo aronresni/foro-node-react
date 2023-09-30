@@ -1,7 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/action/action';
+
+import { Button, Checkbox, Input } from '@material-tailwind/react';
 
 const FormLogin = () => {
     const dispatch = useDispatch()
@@ -55,25 +57,26 @@ const FormLogin = () => {
 
     return (
         <div>
-            <form onSubmit={handleLoginSubmit}>
-                <div>
-                    <label>
-                        Username:
-                        <input value={userLogin.username} onChange={handleEmailChange} />
-                    </label>
+            <form onSubmit={handleLoginSubmit} className="max-w-md mx-auto">
+                <div className='my-5'>
+
+
+                    <Input label='username' value={userLogin.username} onChange={handleEmailChange} />
                 </div>
-                <div>
-                    <label>
-                        Password:
-                        <input value={userLogin.password} onChange={handlePasswordChange} type="password" />
-                    </label>
+                <div className='my-5'>
+
+                    <Input label='password' value={userLogin.password} onChange={handlePasswordChange} type="password" />
                 </div>
-                <div>
-                    <input type="checkbox" />
+                <div className="text-red-500 my-2">
+                    {error}
                 </div>
-                <div>
-                    <button type="submit">Log In</button>
-                    <Link to="/register">
+                <div className='flex items-center'>
+                    <Checkbox /><p>Accept privacy policy</p>
+                </div>
+                <div className='flex flex-col  justify-center align-items '>
+                    <Button type="submit" >Log In</Button>
+
+                    <Link to="/register" className='my-3'>
                         <button>Don't have an account?</button>
                     </Link>
                 </div>
