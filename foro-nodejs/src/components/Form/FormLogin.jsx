@@ -61,11 +61,11 @@ const FormLogin = () => {
                 <div className='my-5'>
 
 
-                    <Input label='username' value={userLogin.username} onChange={handleEmailChange} />
+                    <Input label='Username' value={userLogin.username} onChange={handleEmailChange} />
                 </div>
                 <div className='my-5'>
 
-                    <Input label='password' value={userLogin.password} onChange={handlePasswordChange} type="password" />
+                    <Input label='Password' value={userLogin.password} onChange={handlePasswordChange} type="password" />
                 </div>
                 <div className="text-red-500 my-2">
                     {error}

@@ -25,7 +25,6 @@ const Home = () => {
   return (
     <div>
       <NavBar />
-      <CreatePost />
       <Post />
     </div>
   )
