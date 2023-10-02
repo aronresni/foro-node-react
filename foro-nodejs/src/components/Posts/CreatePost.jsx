@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom';
-import { getPost, postPost, activeuser } from '../../redux/action/action';
-import React from "react";
+import { getPost, postPost, activeuser } from '../../redux/action/action'; 
 import {
     Button,
     Dialog,

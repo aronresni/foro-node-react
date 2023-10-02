@@ -5,8 +5,6 @@ const postPost = require("../../controllers/Posts/postPost");
 
 const postPostHandler = async (req, res) => {
     try {
-
-
                 const { description, username } = req.body;
                 const image = req.file ? req.file.filename : null; // Access the uploaded image from req.file
 

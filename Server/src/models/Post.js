@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         description: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -14,7 +18,7 @@ module.exports = (sequelize) => {
         image: {
             type: DataTypes.STRING,
             allowNull: false,
-                },
+        },
     }, {
         timestamps: false
     });
